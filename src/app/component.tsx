@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from 'react';
+import { useTransition } from "react";
 
 type Props = {
   relativeRedirectAction: () => Promise<never>;
@@ -17,12 +17,17 @@ export default function Component({
     <main>
       <p>
         Both of these buttons call a server action that returns a redirect (type{" "}
-        <code>never</code>). The actions' return values are logged to the
+        <code>never</code>). The value returned by each action is logged to the
         console.
       </p>
       <p>
         Neither of them should return anything normally (unless we were to catch
-        the redirect error).
+        the redirect error), but the absolute URL buttons both return undefined.
+      </p>
+      <p>
+        Note that even if I restructure the action such that it calls
+        `redirect` and then returns a normal value (e.g. a number), the client
+        will still receive undefined.
       </p>
 
       <button
